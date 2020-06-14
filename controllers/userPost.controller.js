@@ -4,6 +4,7 @@ const Error = function (type, message) {
     this.message = message;
 }
 const UserPostCtrl = {
+    // For SignUp
     signin: (req, res) => {
         UserPost.findOne({'email':req.body.email}).then((result) => {
             if (!!result) {
@@ -21,6 +22,7 @@ const UserPostCtrl = {
         });
 
     },
+    // For Login
     login: (req, res) => {
 
         UserPost.findOne({ 'email': req.body.email, 'pass': req.body.pass }).then((result) => {
@@ -32,10 +34,12 @@ const UserPostCtrl = {
             catch((err) => { res.status(500).send(new Error('signin', err)); })
 
     },
+    // For GetAllUser
     getAllUser: (req, res) => {
         UserPost.find().then((result) => res.status(200).send(result)).
             catch((err) => { res.status(500).send(new Error('getAllUser', err)); })
     },
+    // For Delete single user
     deleteUser:(req,res)=>{
           
             UserPost.deleteOne({'_id':req.params.id}).then(()=>{
