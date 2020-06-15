@@ -8,7 +8,7 @@ const userPostSchema=mongoose.Schema({
     gender:{type:Boolean,required:true},
     email:{type:String,required:true},
     mobile:{type:Number,required:true},
-    pass:{type:String,required:true},
+    password:{type:String,required:true},
     otp:{type:Number}
 })
 userPostSchema.index({'$**': 'text'});

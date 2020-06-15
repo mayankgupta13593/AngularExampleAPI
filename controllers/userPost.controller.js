@@ -5,7 +5,7 @@ const Error = function (type, message) {
     this.message = message;
 }
 const UserPostCtrl = {
-    // For SignUp
+   
     signin: (req, res) => {
         UserPost.findOne({ 'email': req.body.email }).then((result) => {
             if (!!result) {
@@ -23,10 +23,10 @@ const UserPostCtrl = {
         });
 
     },
-    // For Login
+
     login: (req, res) => {
 
-        UserPost.findOne({ 'email': req.body.email, 'pass': req.body.pass }).then((result) => {
+        UserPost.findOne({ 'email': req.body.email, 'password': req.body.pass }).then((result) => {
             if (!!result)
                 res.status(200).send(result);
             else
@@ -35,12 +35,12 @@ const UserPostCtrl = {
             catch((err) => { res.status(500).send(new Error('signin', err)); })
 
     },
-    // For GetAllUser
+
     getAllUser: (req, res) => {
         UserPost.find().then((result) => res.status(200).send(result)).
             catch((err) => { res.status(500).send(new Error('getAllUser', err)); })
     },
-    // For Delete single user
+
     deleteUser: (req, res) => {
 
         UserPost.deleteOne({ '_id': req.params.id }).then(() => {
@@ -49,6 +49,7 @@ const UserPostCtrl = {
         }).
             catch((err) => res.status(500).send(new Error('deleteUser', err)));
     },
+
     otpSend:  (req, res) => {
         const otp=Math.floor(100000 + Math.random() * 900000);
 
@@ -73,6 +74,7 @@ const UserPostCtrl = {
           
       });
     },
+
     verifyOTP:(req,res)=>{
        UserPost.findOne({'email':req.body.email}).then((result)=>{
           if(req.body.otp===result.otp)
@@ -83,10 +85,11 @@ const UserPostCtrl = {
        }).catch((err)=>res.status(500).send(new Error('verifyOTP', err))); 
 
     },
+
     changePassword:(req,res)=>{
         UserPost.findOne({'email':req.body.email}).then((rs)=>{
          if(!!rs){
-            UserPost.updateOne({'email':req.body.email},{'pass':req.body.password}).then((result)=>{
+            UserPost.updateOne({'email':req.body.email},{'password':req.body.password}).then((result)=>{
                 res.status(200).send('Password has been changed');
                }).catch((err)=>res.status(500).send(new Error('otpSend', err)))
          }
