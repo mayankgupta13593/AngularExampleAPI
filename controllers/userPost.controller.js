@@ -26,7 +26,7 @@ const UserPostCtrl = {
 
     login: (req, res) => {
 
-        UserPost.findOne({ 'email': req.body.email, 'password': req.body.pass }).then((result) => {
+        UserPost.findOne({ 'email': req.body.email, 'password': req.body.password }).then((result) => {
             if (!!result)
                 res.status(200).send(result);
             else
