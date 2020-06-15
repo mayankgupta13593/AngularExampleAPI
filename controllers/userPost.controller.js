@@ -12,7 +12,7 @@ const UserPostCtrl = {
                 res.status(500).send(new Error('signin', "Email id is already exists"));
             }
             else {
-                UserPost.create(req.body).then(() => res.status(200).send("Welcome to AngularExample")).
+                UserPost.create(req.body).then((result) => res.status(200).send(result)).
                     catch((err) => {
                         res.status(500).send(new Error('signin', err));
                     });
